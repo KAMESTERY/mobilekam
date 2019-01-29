@@ -1,10 +1,8 @@
 FROM gitpod/workspace-full-vnc
 
-ENV FLUTTER_HOME=/home/gitpod/flutter \
-    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$PATH
-
 USER root
 
+# Install Prerequisites and Dart
 RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list && \
     apt-get update && \
@@ -16,5 +14,25 @@ RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - &
 
 USER gitpod
 
+# Install Flutter
 RUN cd /home/gitpod && wget -O flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz \
     && tar -xvf flutter_sdk.tar.xz && rm flutter_sdk.tar.xz;
+
+# Install Android SDK
+ARG ANDROID_SDK_VERSION=4333796
+RUN mkdir -p /home/gitpod/android-sdk && cd /home/gitpod/android-sdk && \
+    wget -q https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip && \
+    unzip *tools*linux*.zip && \
+    rm *tools*linux*.zip
+
+# Adjust Path
+ENV ANDROID_HOME /home/gitpod/android-sdk
+ENV FLUTTER_HOME /home/gitpod/flutter
+ENV PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin:$PATH
+
+# accept the license agreements of the SDK components
+ADD license_accepter.sh /home/gitpod/
+RUN /opt/license_accepter.sh $ANDROID_HOME
+
+# setup adb server
+EXPOSE 5037
