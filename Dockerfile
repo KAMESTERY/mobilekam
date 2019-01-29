@@ -34,5 +34,11 @@ ENV PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/emulator:$ANDROID_HOM
 ADD license_accepter.sh /home/gitpod/
 RUN /home/gitpod/license_accepter.sh $ANDROID_HOME
 
+# Install Android Build Tool and Libraries
+RUN $ANDROID_HOME/tools/bin/sdkmanager --update
+RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
+    "platforms;android-${ANDROID_SDK_VERSION}" \
+    "platform-tools"
+
 # setup adb server
 EXPOSE 5037
