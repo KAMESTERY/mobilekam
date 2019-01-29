@@ -35,9 +35,11 @@ ADD license_accepter.sh /home/gitpod/
 RUN /home/gitpod/license_accepter.sh $ANDROID_HOME
 
 # Install Android Build Tool and Libraries
+ENV ANDROID_VERSION=26
+ENV ANDROID_BUILD_TOOLS_VERSION=26.0.2
 RUN $ANDROID_HOME/tools/bin/sdkmanager --update
 RUN $ANDROID_HOME/tools/bin/sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" \
-    "platforms;android-${ANDROID_SDK_VERSION}" \
+    "platforms;android-${ANDROID_VERSION}" \
     "platform-tools"
 
 # setup adb server
