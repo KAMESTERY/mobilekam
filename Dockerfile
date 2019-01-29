@@ -32,7 +32,7 @@ ENV PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/emulator:$ANDROID_HOM
 
 # accept the license agreements of the SDK components
 ADD license_accepter.sh /home/gitpod/
-RUN /opt/license_accepter.sh $ANDROID_HOME
+RUN /home/gitpod/license_accepter.sh $ANDROID_HOME
 
 # setup adb server
 EXPOSE 5037
