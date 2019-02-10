@@ -1,6 +1,8 @@
 # mobilekam
 
-A new Flutter project.
+Kamestery Mobile Application
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/KAMESTERY/mobilekam)
 
 ## Getting Started
 
