@@ -3,6 +3,7 @@
 Kamestery Mobile Application
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/KAMESTERY/mobilekam)
+[![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/@outcastgeek/mobilekam)
 
 ## Getting Started
 
