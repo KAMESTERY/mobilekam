@@ -1,6 +1,9 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Dimensions, Image, View } from 'react-native';
+import { Divider, Headline, Paragraph, Subheading, Text } from 'react-native-paper';
 import { useQuery, gql } from "@apollo/client";
+import { Base64 } from 'js-base64';
+import Loading from "../components/Loading";
 
 const GET_ARTICLE_DETAILS = gql`
     query GetArticle($topic: String, $documentID: ID) {
@@ -30,11 +33,7 @@ const Details = props => {
         variables: { topic, documentID }
     });
 
-    if (loading) return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Loading Details...</Text>
-        </View>
-    );
+    if (loading) return <Loading />;
 
     if (error) return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -42,11 +41,24 @@ const Details = props => {
         </View>
     );
 
+    const body = Base64.decode(data.article.body);
+    const fileUrl = data.article.media[0] && data.article.media[0].fileUrl ? data.article.media[0].fileUrl : "http://via.placeholder.com/300";
+    const window = Dimensions.get('window');
     return (
-        <View style={{ padding: 10 }}>
-            <Text>Article Topic: {data.article.topic}</Text>
-            <Text>Article Title: {data.article.title}</Text>
-            <Text>{data.body}</Text>
+        <View style={{ flex: 1, flexDirection: 'column', padding: 10 }}>
+            <Image
+                style={{
+                    flex: 1,
+                    height: 100,
+                    width: window.width
+                }}
+                resizeMode='contain'
+                source={{uri: fileUrl}}
+            />
+            <Headline>Title: {data.article.title}</Headline>
+            <Subheading>Topic: {data.article.topic}</Subheading>
+            <Divider />
+            <Paragraph>{body}</Paragraph>
         </View>
     );
 };

@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler'; // There should be nothing above it
 import React from 'react';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Screens from './app/screens/Index';
 import getEnVars from './config';
@@ -14,10 +15,21 @@ const client = new ApolloClient({
     cache
 });
 
+const theme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: 'tomato',
+        accent: 'yellow'
+    }
+};
+
 const App = () => {
     return (
         <ApolloProvider client={client}>
-            <Screens />
+            <PaperProvider theme={theme}>
+                <Screens />
+            </PaperProvider>
         </ApolloProvider>
     );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Text, View, TouchableOpacity } from "react-native";
+import { FlatList, View, TouchableOpacity } from "react-native";
 import styled from 'styled-components/native';
 import NewsItem from "./NewsItem";
 
@@ -7,6 +7,8 @@ const NewsFeed = props => {
     return (
         <View>
             <FlatList
+                refreshing={props.refreshing}
+                onRefresh={props.onRefresh}
                 data={props.articles}
                 keyExtractor={({ title }) => title.toString()}
                 ItemSeparatorComponent={() => <Separator />}

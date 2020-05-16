@@ -13,6 +13,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "description": ""
+    "description": "Kamestery Mobile Client",
+    "githubUrl": "https://github.com/KAMESTERY/mobilekam"
   }
 }
