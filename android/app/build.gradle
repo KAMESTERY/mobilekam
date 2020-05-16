@@ -76,7 +76,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "Index.ts",
+    entryFile: "Index.tsx",
     enableHermes: false
 ]
 

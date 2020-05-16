@@ -2,6 +2,7 @@ import React from "react";
 import { createAppContainer } from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // import screens
 import Feed from './Feed';
@@ -23,13 +24,25 @@ const TabNavigator = createBottomTabNavigator({
     FeedScreen: {
         screen: FeedStack,
         navigationOptions: {
-            tabBarLabel: 'Home'
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ tintColor }) => (
+                <MaterialCommunityIcons
+                    name="home" size={24}
+                    color={tintColor}
+                />
+            )
         }
     },
     FavoriteScreen: {
         screen: FavoritesStack,
         navigationOptions: {
-            tabBarLabel: 'Favorites'
+            tabBarLabel: 'Favorites',
+            tabBarIcon: ({ tintColor }) => (
+                <MaterialCommunityIcons
+                    name="star" size={24}
+                    color={tintColor}
+                />
+            )
         }
     }
 });

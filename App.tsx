@@ -1,9 +1,25 @@
 import 'react-native-gesture-handler'; // There should be nothing above it
 import React from 'react';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Screens from './app/screens/Index';
+import getEnVars from './config';
+
+const { API_URI } = getEnVars();
+// configure API URI and Cache
+const uri = API_URI;
+const cache = new InMemoryCache();
+// configure GraphQL client
+const client = new ApolloClient({
+    uri,
+    cache
+});
 
 const App = () => {
-    return <Screens />;
+    return (
+        <ApolloProvider client={client}>
+            <Screens />
+        </ApolloProvider>
+    );
 };
 
 export default App;
