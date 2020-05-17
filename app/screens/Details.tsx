@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dimensions, Image, View } from 'react-native';
-import { Divider, Headline, Paragraph, Subheading, Text } from 'react-native-paper';
+import {Avatar, Card, Divider, Headline, Paragraph, Subheading, Surface, Text} from 'react-native-paper';
+import styled from 'styled-components/native';
 import { useQuery, gql } from "@apollo/client";
 import { Base64 } from 'js-base64';
 import Loading from "../components/Loading";
@@ -45,23 +46,17 @@ const Details = props => {
     const fileUrl = data.article.media[0] && data.article.media[0].fileUrl ? data.article.media[0].fileUrl : "http://via.placeholder.com/300";
     const window = Dimensions.get('window');
     return (
-        <View style={{ flex: 1, flexDirection: 'column', padding: 10 }}>
-            <Image
-                style={{
-                    flex: 1,
-                    height: 100,
-                    width: window.width
-                }}
-                resizeMode='contain'
-                source={{uri: fileUrl}}
-            />
-            <Headline>Title: {data.article.title}</Headline>
-            <Subheading>Topic: {data.article.topic}</Subheading>
-            <Divider />
-            <Paragraph>{body}</Paragraph>
-        </View>
+        <Card style={{flex: 1, flexDirection: "column", margin: 4}}>
+            <Card.Cover source={{uri: fileUrl}} />
+            <Card.Title title={data.article.title} subtitle={data.article.topic} />
+            <Card.Content>
+                <Paragraph>{body}</Paragraph>
+            </Card.Content>
+        </Card>
     );
 };
+
+
 
 Details.navigationOptions = {
     title: 'Details'

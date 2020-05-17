@@ -47,7 +47,7 @@ const Feed = props => {
 
     return (
         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', paddingTop: 20 }}>
-            <Text>News Feed</Text>
+            <Text style={{margin: 20}}>Recent News</Text>
             <NewsFeed
                 articles={data.articles}
                 navigation={props.navigation}

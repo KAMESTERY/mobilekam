@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'; // There should be nothing above it
 import React from 'react';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { DarkTheme, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Screens from './app/screens/Index';
 import getEnVars from './config';
